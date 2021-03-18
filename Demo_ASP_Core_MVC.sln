@@ -7,6 +7,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Demo_ASP_Core_MVC", "Demo_A
 EndProject
 Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "Demo_ASP_Core_MVC.Database", "Demo_ASP_Core_MVC.Database\Demo_ASP_Core_MVC.Database.sqlproj", "{E1699192-20ED-4879-9504-5A242F217147}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Toolbox", "Toolbox\Toolbox.csproj", "{9984FE84-C7F2-4D30-A3CB-04D0E0763652}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -23,6 +25,10 @@ Global
 		{E1699192-20ED-4879-9504-5A242F217147}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E1699192-20ED-4879-9504-5A242F217147}.Release|Any CPU.Build.0 = Release|Any CPU
 		{E1699192-20ED-4879-9504-5A242F217147}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{9984FE84-C7F2-4D30-A3CB-04D0E0763652}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9984FE84-C7F2-4D30-A3CB-04D0E0763652}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9984FE84-C7F2-4D30-A3CB-04D0E0763652}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9984FE84-C7F2-4D30-A3CB-04D0E0763652}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
