@@ -11,13 +11,13 @@ namespace Toolbox.Database
         private string _ConnectionString;
         private DbProviderFactory _Factory;
 
-        public Connect(string connectionString)
+        public Connect(DbProviderFactory factory, string connectionString)
         {
             if (string.IsNullOrWhiteSpace(connectionString))
                 throw new ArgumentNullException(nameof(connectionString));
 
             _ConnectionString = connectionString;
-            _Factory = DbProviderFactories.GetFactory("System.Data.SqlClient");
+            _Factory = factory;
         }
 
         private DbCommand CreateCommand(DbConnection db, Query query)
@@ -47,11 +47,11 @@ namespace Toolbox.Database
         }
 
 
-        public int ExecuteNonquery(Query query) 
+        public int ExecuteNonquery(Query query)
         {
             using (DbConnection db = CreateConnection())
             {
-                using(DbCommand cmd = CreateCommand(db, query))
+                using (DbCommand cmd = CreateCommand(db, query))
                 {
                     db.Open();
 
@@ -75,8 +75,23 @@ namespace Toolbox.Database
             }
         }
 
-        // TODO Finish this  ;)
-        // public ... ExecuteReader() { }
+        public IEnumerable<TResult> ExecuteReader<TResult>(Query query, Func<IDataRecord, TResult> convert)
+        {
+            using (DbConnection db = CreateConnection())
+            {
+                using (DbCommand cmd = CreateCommand(db, query))
+                {
+                    db.Open();
 
+                    using (IDataReader reader = cmd.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            yield return convert(reader);
+                        }
+                    }
+                }
+            }
+        }
     }
 }
