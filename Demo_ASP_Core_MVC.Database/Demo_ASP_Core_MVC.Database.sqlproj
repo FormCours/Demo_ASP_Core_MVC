@@ -74,6 +74,7 @@
     <Build Include="Procedures\UpdateTopic.sql" />
     <Build Include="Procedures\UpdateMessage.sql" />
     <Build Include="Procedures\LoginMember.sql" />
+    <None Include="Procedures\AddTopic_Old.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Demo_ASP_Core_MVC.Database.publish.xml" />
