@@ -1,4 +1,5 @@
-﻿using Demo_ASP_Core_MVC.Models;
+﻿using Demo_ASP_Core_MVC.DataServices;
+using Demo_ASP_Core_MVC.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System;
@@ -12,15 +13,22 @@ namespace Demo_ASP_Core_MVC.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
+        private TopicService topicService;
 
         public HomeController(ILogger<HomeController> logger)
         {
             _logger = logger;
+            topicService = new TopicService();
         }
 
         public IActionResult Index()
         {
-            return View();
+            HomeViewModel homeVM = new HomeViewModel()
+            {
+                Topics = topicService.GetAllWithLastMessage()
+            };
+
+            return View(homeVM);
         }
 
         public IActionResult Privacy()

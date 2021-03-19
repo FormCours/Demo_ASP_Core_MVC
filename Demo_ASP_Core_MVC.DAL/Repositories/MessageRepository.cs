@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Linq;
 using System.Text;
 using Toolbox.Database;
 
@@ -9,6 +10,16 @@ namespace Demo_ASP_Core_MVC.DAL.Repositories
 {
     public class MessageRepository : RepositoryBase<Guid, MessageEntity>
     {
+        public MessageEntity GetLastOfTopic(Guid idTopic)
+        {
+            Query query = new Query($"SELECT TOP(1) * FROM {TableName}" +
+                                    $" WHERE  Id_Topic = @Id_Topic" +
+                                    $" ORDER BY Submit_Date DESC");
+            query.AddParameter("@Id_Topic", idTopic);
+
+            return Connect.ExecuteReader(query, ConvertRecordToEntity).SingleOrDefault();
+        }
+
         public override Guid Insert(MessageEntity entity)
         {
             Query query = new Query("AddMessage", true);

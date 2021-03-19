@@ -1,4 +1,6 @@
-﻿using System;
+﻿
+using Microsoft.Extensions.Configuration;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
@@ -21,7 +23,7 @@ namespace Demo_ASP_Core_MVC.DAL.Repositories
         {
             // - Initialisation de la toolbox ADO
             // Installer le nuget package "System.data.SqlClient"
-            Connect = new Connect(SqlClientFactory.Instance, "Connection string !!!");
+            Connect = new Connect(SqlClientFactory.Instance, "Server=TFNSDEV00A\\TECHNI;Database=Demo_ASP_Core;Trusted_Connection=True;");
 
             // - Recup des info de la table
             TableAttribute infoTable = Attribute.GetCustomAttribute(typeof(TEntity), typeof(TableAttribute)) as TableAttribute;

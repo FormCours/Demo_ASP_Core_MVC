@@ -1,8 +1,30 @@
-﻿@{
-    ViewData["Title"] = "Home Page";
+﻿@model Demo_ASP_Core_MVC.Models.HomeViewModel
+
+@{
+    ViewData["Title"] = "Index";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-</div>
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+	<thead>
+		<tr>
+			<th>Title</th>
+			<th>Creator</th>
+			<th>Last message</th>
+		</tr>
+	</thead>
+	<tbody>
+		@foreach (TopicWithLastMessage item in Model.Topics)
+		{
+			<tr>
+				<td>@item.Title</td>
+				<td>@item.Creator.Pseudo</td>
+				<td>@item.LastMessage.SubmitDate</td>
+			</tr>
+		}
+	</tbody>
+</table>
