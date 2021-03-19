@@ -10,16 +10,16 @@ namespace Demo_ASP_Core_MVC.DataServices
 {
     public class MemberService
     {
-        private MemberRepository memberRepo;
+        private MemberRepository _memberRepo;
 
-        public MemberService()
+        public MemberService(MemberRepository memberRepo)
         {
-            memberRepo = new MemberRepository();
+            _memberRepo = memberRepo;
         }
 
         public Member Get(Guid id)
         {
-            MemberEntity entity = memberRepo.Get(id);
+            MemberEntity entity = _memberRepo.Get(id);
 
             return new Member()
             {

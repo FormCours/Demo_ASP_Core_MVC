@@ -13,19 +13,19 @@ namespace Demo_ASP_Core_MVC.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
-        private TopicService topicService;
+        private TopicService _topicService;
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(ILogger<HomeController> logger, TopicService topicService)
         {
             _logger = logger;
-            topicService = new TopicService();
+            _topicService = topicService;
         }
 
         public IActionResult Index()
         {
             HomeViewModel homeVM = new HomeViewModel()
             {
-                Topics = topicService.GetAllWithLastMessage()
+                Topics = _topicService.GetAllWithLastMessage()
             };
 
             return View(homeVM);

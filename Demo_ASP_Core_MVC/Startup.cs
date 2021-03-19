@@ -1,3 +1,5 @@
+using Demo_ASP_Core_MVC.DAL.Repositories;
+using Demo_ASP_Core_MVC.DataServices;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -23,6 +25,15 @@ namespace Demo_ASP_Core_MVC
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            // Injection de dépendence => AddSingleton / AddTransient / AddScoped
+            services.AddTransient(typeof(MemberService));
+            services.AddTransient(typeof(TopicService));
+            services.AddTransient(typeof(MessageService));
+
+            services.AddScoped(typeof(MemberRepository));
+            services.AddScoped(typeof(TopicRepository));
+            services.AddScoped(typeof(MessageRepository));
+
             services.AddControllersWithViews();
         }
 

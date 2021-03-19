@@ -1,5 +1,4 @@
-﻿
-using Microsoft.Extensions.Configuration;
+﻿using Microsoft.Extensions.Configuration;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -15,15 +14,22 @@ namespace Demo_ASP_Core_MVC.DAL.Repositories
     public abstract class RepositoryBase<TKey, TEntity>
         : IRepository<TKey, TEntity> where TEntity : IEntity<TKey>
     {
+        protected IConfiguration _configuration;
+
         protected Connect Connect { get; }
         protected string TableName { get; }
         protected string IdName { get; }
 
-        public RepositoryBase()
+        public RepositoryBase(IConfiguration configuration)
         {
+            _configuration = configuration;
+
             // - Initialisation de la toolbox ADO
+            // Recuperation de la connection string depuis le fichier de config
+            string connectionString = configuration.GetConnectionString("db-source");
+
             // Installer le nuget package "System.data.SqlClient"
-            Connect = new Connect(SqlClientFactory.Instance, "Server=TFNSDEV00A\\TECHNI;Database=Demo_ASP_Core;Trusted_Connection=True;");
+            Connect = new Connect(SqlClientFactory.Instance, connectionString);
 
             // - Recup des info de la table
             TableAttribute infoTable = Attribute.GetCustomAttribute(typeof(TEntity), typeof(TableAttribute)) as TableAttribute;

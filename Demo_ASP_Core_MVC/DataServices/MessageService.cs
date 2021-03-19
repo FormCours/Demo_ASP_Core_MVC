@@ -10,18 +10,18 @@ namespace Demo_ASP_Core_MVC.DataServices
 {
     public class MessageService
     {
-        private MessageRepository messageRepo;
-        private MemberService memberService;
+        private MessageRepository _messageRepo;
+        private MemberService _memberService;
 
-        public MessageService()
+        public MessageService(MessageRepository messageRepo, MemberService memberService)
         {
-            messageRepo = new MessageRepository();
-            memberService = new MemberService();
+            _messageRepo = messageRepo;
+            _memberService = memberService;
         }
 
         public Message GetLastOfTopic(Guid idTopic)
         {
-            MessageEntity entity = messageRepo.GetLastOfTopic(idTopic);
+            MessageEntity entity = _messageRepo.GetLastOfTopic(idTopic);
 
             return new Message()
             {
@@ -29,7 +29,7 @@ namespace Demo_ASP_Core_MVC.DataServices
                 Content = entity.Content,
                 SubmitDate = entity.SubmitDate,
                 UpdateDate = entity.UpdateDate,
-                Creator = memberService.Get(entity.IdMember)
+                Creator = _memberService.Get(entity.IdMember)
             };
         }
     }

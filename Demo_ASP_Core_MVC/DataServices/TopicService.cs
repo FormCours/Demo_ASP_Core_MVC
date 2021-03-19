@@ -9,36 +9,36 @@ namespace Demo_ASP_Core_MVC.DataServices
 {
     public class TopicService
     {
-        private TopicRepository topicRepo;
-        private MemberService memberService;
-        private MessageService messageService;
+        private TopicRepository _topicRepo;
+        private MemberService _memberService;
+        private MessageService _messageService;
 
-        public TopicService()
+        public TopicService(TopicRepository topicRepo, MemberService memberService, MessageService messageService)
         {
-            topicRepo = new TopicRepository();
-            memberService = new MemberService();
-            messageService = new MessageService();
+            _topicRepo = topicRepo;
+            _memberService = memberService;
+            _messageService = messageService;
         }
 
 
         public IEnumerable<Topic> GetAll()
         {
-            return topicRepo.GetAll().Select(t => new Topic()
+            return _topicRepo.GetAll().Select(t => new Topic()
             {
                 Id = t.Id,
                 Title = t.Title,
-                Creator = memberService.Get(t.IdCreator)
+                Creator = _memberService.Get(t.IdCreator)
             });
-        } 
+        }
 
         public IEnumerable<TopicWithLastMessage> GetAllWithLastMessage()
         {
-            return topicRepo.GetAll().Select(t => new TopicWithLastMessage()
+            return _topicRepo.GetAll().Select(t => new TopicWithLastMessage()
             {
                 Id = t.Id,
                 Title = t.Title,
-                Creator = memberService.Get(t.IdCreator),
-                LastMessage = messageService.GetLastOfTopic(t.Id)
+                Creator = _memberService.Get(t.IdCreator),
+                LastMessage = _messageService.GetLastOfTopic(t.Id)
             });
         }
     }

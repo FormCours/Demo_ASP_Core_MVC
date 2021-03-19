@@ -1,4 +1,5 @@
 ﻿using Demo_ASP_Core_MVC.DAL.Entities;
+using Microsoft.Extensions.Configuration;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -9,6 +10,9 @@ namespace Demo_ASP_Core_MVC.DAL.Repositories
 {
     public class TopicRepository : RepositoryBase<Guid, TopicEntity>
     {
+        public TopicRepository(IConfiguration configuration) : base(configuration)
+        { }
+
         public override Guid Insert(TopicEntity entity)
         {
             Query query = new Query("AddTopic", true);
