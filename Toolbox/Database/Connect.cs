@@ -68,7 +68,7 @@ namespace Toolbox.Database
                 {
                     db.Open();
 
-                    object o = cmd.ExecuteNonQuery();
+                    object o = cmd.ExecuteScalar();
 
                     return (o is DBNull) ? default(TResult) : (TResult)o;
                 }
