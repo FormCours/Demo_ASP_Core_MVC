@@ -9,7 +9,7 @@ Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "Demo_ASP_Core_MVC.Database"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Toolbox", "Toolbox\Toolbox.csproj", "{9984FE84-C7F2-4D30-A3CB-04D0E0763652}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Demo_ASP_Core_MVC.DAL", "Demo_ASP_Core_MVC.DAL\Demo_ASP_Core_MVC.DAL.csproj", "{E01E1327-2634-4FB9-82A1-1C3BF05C551C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Demo_ASP_Core_MVC.DAL", "Demo_ASP_Core_MVC.DAL\Demo_ASP_Core_MVC.DAL.csproj", "{E01E1327-2634-4FB9-82A1-1C3BF05C551C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

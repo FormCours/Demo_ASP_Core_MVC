@@ -32,5 +32,29 @@ namespace Demo_ASP_Core_MVC.DataServices
                 Creator = _memberService.Get(entity.IdMember)
             };
         }
+
+        internal Guid Create(Guid idTopic, string content, Guid idCreator)
+        {
+            Guid idMessage = _messageRepo.Insert(new MessageEntity()
+            {
+                IdTopic = idTopic,
+                IdMember = idCreator,
+                Content = content
+            });
+
+            return idMessage;
+        }
+
+        internal IEnumerable<Message> GetAllOfTopic(Guid idTopic)
+        {
+            return _messageRepo.GetAllOfTopic(idTopic).Select(m => new Message()
+            {
+                Id = m.Id,
+                Content = m.Content,
+                SubmitDate = m.SubmitDate,
+                UpdateDate = m.UpdateDate,
+                Creator = _memberService.Get(m.IdMember)
+            });
+        }
     }
 }

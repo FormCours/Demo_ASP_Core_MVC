@@ -7,21 +7,24 @@
 <h1>Index</h1>
 
 <p>
-    <a asp-action="Create">Create New</a>
+    <a asp-action="CreateTopic">Créer un nouveau topic</a>
 </p>
 <table class="table">
 	<thead>
 		<tr>
-			<th>Title</th>
-			<th>Creator</th>
-			<th>Last message</th>
+			<th>Titre</th>
+			<th>Createur</th>
+			<th>Dernier message</th>
 		</tr>
 	</thead>
 	<tbody>
 		@foreach (TopicWithLastMessage item in Model.Topics)
 		{
 			<tr>
-				<td>@item.Title</td>
+				<td>
+					@*@Html.ActionLink(item.Title, "Topic", new { Id = item.Id })*@
+					<a asp-action="Topic" asp-route-id="@item.Id" asp-route-test="Demo">@item.Title</a>
+				</td>
 				<td>@item.Creator.Pseudo</td>
 				<td>@item.LastMessage.SubmitDate</td>
 			</tr>

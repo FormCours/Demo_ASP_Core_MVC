@@ -1,0 +1,40 @@
+﻿@model Demo_ASP_Core_MVC.Models.TopicViewModel
+@using Demo_ASP_Core_MVC.SessionHelper
+
+@{
+	ViewData["Title"] = "Topic";
+}
+
+<h1>@Model.Topic.Title</h1>
+<h3>Auteur : @Model.Topic.Creator.Pseudo</h3>
+
+<section class="list-group col-md-12">
+	@foreach (var message in Model.Messages)
+	{
+		string update = message.UpdateDate is null ? "" : $"(Derniere modification: {message.UpdateDate})";
+
+		<article class="list-group-item">
+			<h5>@message.Creator.Pseudo - @message.SubmitDate @update</h5>
+			<p>@message.Content</p>
+		</article>
+	}
+</section>
+
+
+@if (Context.Session.IsLogged())
+{
+	<h6>Ajouter un message</h6>
+	<div class="row">
+		<div class="col-md-8">
+			<form asp-action="Topic">
+				<div asp-validation-summary="ModelOnly" class="text-danger"></div>
+				<div class="form-group col-md-8">
+					<input asp-for="NewMessage" class="form-control col-md-8" />
+					<span asp-validation-for="NewMessage" class="text-danger col-md-8"></span>
+					<input type="submit" value="Envoyer" class="btn btn-primary col-md-4" />
+				</div>
+			</form>
+		</div>
+	</div>
+}
+

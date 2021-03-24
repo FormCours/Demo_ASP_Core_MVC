@@ -43,6 +43,16 @@ namespace Demo_ASP_Core_MVC.DAL.Repositories
             return Connect.ExecuteNonquery(query) == 1;
         }
 
+        public IEnumerable<MessageEntity> GetAllOfTopic(Guid idTopic)
+        {
+            Query query = new Query($"SELECT * FROM {TableName} " +
+                                    $" WHERE [Id_Topic] = @idTopic " +
+                                    $" ORDER BY [Submit_Date] ASC");
+            query.AddParameter("@idTopic", idTopic);
+
+            return Connect.ExecuteReader(query, ConvertRecordToEntity);
+        }
+
         protected override MessageEntity ConvertRecordToEntity(IDataRecord record)
         {
             return new MessageEntity()
