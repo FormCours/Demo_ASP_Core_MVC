@@ -1,3 +1,4 @@
+using Demo_ASP_Core_MVC.AuthenticationHelper;
 using Demo_ASP_Core_MVC.DAL.Repositories;
 using Demo_ASP_Core_MVC.DataServices;
 using Microsoft.AspNetCore.Builder;
@@ -45,6 +46,16 @@ namespace Demo_ASP_Core_MVC
                 options.Cookie.HttpOnly = true;
                 options.IdleTimeout = TimeSpan.FromDays(7);
             });
+
+
+            services.AddAuthentication(options =>
+            {
+                options.DefaultScheme
+                    = AuthenticationSchemeConstants.CustomAuthenticationScheme;
+            })
+            .AddScheme<CustomAuthenticationSchemeOptions, CustomAuthenticationHandler>
+                    (AuthenticationSchemeConstants.CustomAuthenticationScheme, op => { });
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -66,6 +77,9 @@ namespace Demo_ASP_Core_MVC
             app.UseRouting();
 
             app.UseSession();
+
+            app.UseAuthentication();
+            app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
             {

@@ -36,6 +36,7 @@ namespace Demo_ASP_Core_MVC.Controllers
         }
 
         [HttpGet]
+        [Authorize]
         public IActionResult CreateTopic()
         {
             return View();
@@ -43,6 +44,7 @@ namespace Demo_ASP_Core_MVC.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize]
         public IActionResult CreateTopic(TopicCreationViewModel vm)
         {
             if(ModelState.IsValid)
@@ -72,6 +74,7 @@ namespace Demo_ASP_Core_MVC.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize]
         public IActionResult Topic(Guid id, TopicViewModel viewModel) 
         {
             if(ModelState.IsValid)
