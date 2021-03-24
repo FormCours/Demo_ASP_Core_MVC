@@ -35,6 +35,16 @@ namespace Demo_ASP_Core_MVC
             services.AddScoped(typeof(MessageRepository));
 
             services.AddControllersWithViews();
+
+            // Config de la session
+            // https://docs.microsoft.com/en-us/aspnet/core/fundamentals/app-state?view=aspnetcore-3.1
+            services.AddDistributedMemoryCache();
+            services.AddSession(options =>
+            {
+                options.Cookie.IsEssential = true;
+                options.Cookie.HttpOnly = true;
+                options.IdleTimeout = TimeSpan.FromDays(7);
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -55,7 +65,7 @@ namespace Demo_ASP_Core_MVC
 
             app.UseRouting();
 
-            app.UseAuthorization();
+            app.UseSession();
 
             app.UseEndpoints(endpoints =>
             {

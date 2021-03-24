@@ -24,6 +24,7 @@ namespace Demo_ASP_Core_MVC.Models
     {
         [Required(AllowEmptyStrings = false, ErrorMessage = "L'adresse E-mail est necessaire !")]
         [DisplayName("E-mail")]
+        [DataType(DataType.EmailAddress)]
         public string Email { get; set; }
 
         [Required(AllowEmptyStrings = false, ErrorMessage = "Le pseudo n'est pas en option :p")]
@@ -32,11 +33,13 @@ namespace Demo_ASP_Core_MVC.Models
 
         [Required(AllowEmptyStrings = false, ErrorMessage = "Le mot de passe est requis")]
         [DisplayName("Mot de passe")]
+        [DataType(DataType.Password)]
         public string Password1 { get; set; }
 
         [Required(AllowEmptyStrings = false, ErrorMessage = "La validation du mot de passe est requis")]
         [Compare(nameof(Password1), ErrorMessage = "Les 2 mots de passe ne sont pas identique !")]
         [DisplayName("Validation du mot de passe")]
+        [DataType(DataType.Password)]
         public string Password2 { get; set; }
     }
 }

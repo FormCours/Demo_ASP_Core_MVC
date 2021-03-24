@@ -3,6 +3,7 @@ using Microsoft.Extensions.Configuration;
 using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Linq;
 using System.Text;
 using Toolbox.Database;
 
@@ -54,6 +55,33 @@ namespace Demo_ASP_Core_MVC.DAL.Repositories
             query.AddParameter("@Password", entity.Password);
 
             return Connect.ExecuteNonquery(query) == 1;
+        }
+
+        public MemberEntity GetByCredentials(string email, string password)
+        {
+            Query query = new Query("LoginMember", true);
+            query.AddParameter("@Email", email);
+            query.AddParameter("@Password", password);
+
+            return Connect.ExecuteReader(query, ConvertRecordToEntity).SingleOrDefault();
+        }
+
+        public bool CheckEmailIsAvailable(string email)
+        {
+            Query query = new Query($"Select {IdName} FROM {TableName} " +
+                                    $" WHERE Email LIKE @email;");
+            query.AddParameter("@email", email);
+
+            return Connect.ExecuteScalar<Guid?>(query) is null;
+        }
+
+        public bool CheckPseudoIsAvailable(string pseudo)
+        {
+            Query query = new Query($"Select {IdName} FROM {TableName} " +
+                                    $" WHERE Pseudo LIKE @pseudo;");
+            query.AddParameter("@pseudo", pseudo);
+
+            return Connect.ExecuteScalar<Guid?>(query) is null;
         }
     }
 }

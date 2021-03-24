@@ -1,0 +1,19 @@
+﻿@using Demo_ASP_Core_MVC.SessionHelper
+
+<ul class="navbar-nav flex-grow-1">
+	@if (Context.Session.IsLogged())
+	{
+		<li class="nav-item">
+			<a class="nav-link text-dark" asp-area="" asp-controller="Member" asp-action="Logout">Logout</a>
+		</li>
+	}
+	else
+	{
+		<li class="nav-item">
+			<a class="nav-link text-dark" asp-area="" asp-controller="Member" asp-action="Login">Login</a>
+		</li>
+		<li class="nav-item">
+			<a class="nav-link text-dark" asp-area="" asp-controller="Member" asp-action="Register">Register</a>
+		</li>
+	}
+</ul>
